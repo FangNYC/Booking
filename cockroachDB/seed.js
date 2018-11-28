@@ -64,9 +64,6 @@ function connectAndSeed(pool) {
         }
 
         console.log("bookings initialized");
-        results.rows.forEach(function(row) {
-          console.log(row);
-        });
 
         finish();
       }

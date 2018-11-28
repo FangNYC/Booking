@@ -44,7 +44,6 @@ function getListings() {
 }
 
 function postListing({ price, minStay, stars, numRatings, max }) {
-  console.log('hi')
   return new Promise((resolve, reject) => {
     query(
       `
