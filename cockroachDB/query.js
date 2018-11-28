@@ -13,12 +13,8 @@ function query(query, values, cb) {
       finish();
     }
 
-    console.log(query)
-    console.log(values)
-
     client.query(query, values, (err, res) => {
       if (err) cb(err, null);
-      console.log(res);
       cb(null, res);
       finish();
     });
