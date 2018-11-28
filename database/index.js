@@ -73,8 +73,7 @@ const postDate = ({ date, apartmentId }) => {
   return Promise.using(getMySqlConnection(), function(connection) {
     return connection
       .query("insert into dates (date, apartment_id) values (?,?)", 
-      [date, apartmentId
-      ])
+      [date, apartmentId])
       .then(function(rows) {
         return rows;
       })
