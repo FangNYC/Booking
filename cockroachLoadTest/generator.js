@@ -26,8 +26,8 @@ function generateDateData(userContext, events, done) {
     `;
   const apartmentId = aptIdCounter++ % 5000;
   // add variables to virtual user's context:
-  userContext.vars.date = date;
-  userContext.vars.apartmentId = apartmentId;
+  userContext.vars.date = date.toString();
+  userContext.vars.apartmentId = apartmentId.toString();
   // continue with executing the scenario:
   return done();
 }
@@ -36,35 +36,35 @@ var idCounter = 1;
 function generateApartmentDataId(userContext, events, done) {
   // generate data with Faker:
   const id = idCounter++;
-  const price = faker.commerce.price();
+  const price = faker.random.number();
   const minStay = (faker.random.number() % 5) + 1;
   const stars = (faker.random.number() % 5) + 1;
   const numRatings = (faker.random.number() % 100) + 1;
   const max = (faker.random.number() % 12) + 6;
   // add variables to virtual user's context:
-  userContext.vars.price = price;
-  userContext.vars.minStay = minStay;
-  userContext.vars.numRatings = numRatings;
-  userContext.vars.max = max;
-  userContext.vars.stars = stars;
-  userContext.vars.id = id;
+  userContext.vars.price = price.toString();
+  userContext.vars.minStay = minStay.toString();
+  userContext.vars.numRatings = numRatings.toString();
+  userContext.vars.max = max.toString();
+  userContext.vars.stars = stars.toString();
+  userContext.vars.id = id.toString();
   // continue with executing the scenario:
   return done();
 }
 
 function generateApartmentData(userContext, events, done) {
   // generate data with Faker:
-  const price = faker.commerce.price();
+  const price = faker.random.number();
   const minStay = (faker.random.number() % 5) + 1;
   const stars = (faker.random.number() % 5) + 1;
   const numRatings = (faker.random.number() % 100) + 1;
   const max = (faker.random.number() % 12) + 6;
   // add variables to virtual user's context:
-  userContext.vars.price = price;
-  userContext.vars.minStay = minStay;
-  userContext.vars.numRatings = numRatings;
-  userContext.vars.max = max;
-  userContext.vars.stars = stars;
+  userContext.vars.price = price.toString();
+  userContext.vars.minStay = minStay.toString();
+  userContext.vars.numRatings = numRatings.toString();
+  userContext.vars.max = max.toString();
+  userContext.vars.stars = stars.toString();
   // continue with executing the scenario:
   return done();
 }

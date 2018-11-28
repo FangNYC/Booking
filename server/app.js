@@ -44,6 +44,7 @@ app.get("/api/listings", (req, res) => {
 // { price, minStay, stars, numRatings, max }
 // '10000','10','1','1','1000'
 app.post("/api/listing", (req, res) => {
+  console.log(req.body);
   database
     .postListing(req.body)
     .then(dataObj => {

@@ -21,4 +21,4 @@ scenarios:
             stars: "{{stars}}"
             numRatings: "{{numRatings}}"
             max: "{{max}}"
-      - log: "Sent a request to /api/listings with {{ price }}, {{ stars }}, {{ minStay }}"
+      - log: "Sent a request to /api/listing with {{ price }}, {{ stars }}, {{ minStay }}"
