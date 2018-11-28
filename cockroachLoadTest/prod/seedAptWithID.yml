@@ -1,12 +1,12 @@
-# artillery run cockroachLoadTest/dev/seedAptWithID.yml
+# artillery run cockroachLoadTest/prod/seedAptWithID.yml
 
 config:
-  target: "http://127.0.0.1:4000"
+  target: "http://ec2-54-209-75-211.compute-1.amazonaws.com"
   processor: "../generator.js"
   http: 10
   phases:
     - duration: 10
-      arrivalRate: 500
+      arrivalRate: 100
   defaults:
     headers:
 scenarios:

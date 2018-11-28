@@ -8,7 +8,7 @@ config:
   http: 10
   phases:
     - duration: 60
-      arrivalRate: 400
+      arrivalRate: 200
   defaults:
     headers:
 scenarios:
