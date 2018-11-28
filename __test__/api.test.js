@@ -74,7 +74,6 @@ describe("Test posting a date", function() {
       .end(function(err, res) {
         if (err) return done(err);
         result = JSON.parse(res.text);
-        console.log("created date " + dateId);
         done();
       });
   });
