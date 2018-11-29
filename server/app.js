@@ -1,12 +1,14 @@
 require("newrelic");
 
+// const database = require("../database/index.js"); // mysql connection
+const database = require("../cockroachDB/index.js");
+const { schema, root } = require('../graphQL/index.js')
+
 const bodyParser = require("body-parser");
 var compression = require("compression");
 const cors = require("cors");
-// const database = require("../database/index.js"); // mysql connection
-const database = require("../cockroachDB/index.js");
-
 const express = require("express");
+const express_graphql = require('express-graphql');
 const morgan = require("morgan");
 const path = require("path");
 
@@ -17,6 +19,12 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("default", morgan);
 app.use(express.static(path.join(__dirname + "/../client/dist")));
+
+app.use('/graphql', express_graphql({
+  schema: schema,
+  rootValue: root,
+  graphiql: true
+}));
 
 app.get("/api/listing/:id", (req, res) => {
   id = req.params.id;
