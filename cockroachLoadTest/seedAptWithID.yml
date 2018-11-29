@@ -1,0 +1,25 @@
+# artillery run cockroachLoadTest/seedAptWithID.yml
+
+config:
+  target: "http://127.0.0.1:4000"
+  processor: "./generator.js"
+  http: 10
+  phases:
+    - duration: 10
+      arrivalRate: 500
+  defaults:
+    headers:
+scenarios:
+  - name: "register an apartment listing with incrementing ids"
+    flow:
+      - function: "generateApartmentDataId"
+      - post:
+          url: "/api/listingId"
+          json:
+            id: "{{id}}"
+            price: "{{price}}"
+            minStay: "{{minStay}}"
+            stars: "{{stars}}"
+            numRatings: "{{numRatings}}"
+            max: "{{max}}"
+      - log: "Sent a request to /api/listings with {{ id }}, {{ stars }}, {{ minStay }}"

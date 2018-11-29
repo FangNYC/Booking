@@ -1,7 +1,6 @@
 const legacy = require("./legacy.js");
 var Promise = require("bluebird");
-var getMySqlConnection = require("./mysqlConnection");
-// var getMongoConnection = require("./mongoConnection"); // TODO = allow configurable mongo use
+var getMySqlConnection = require("./mysqlConnection.js");
 
 // used by client
 const getListingData = id => {
@@ -16,8 +15,8 @@ const getListings = () => {
       .then(function(rows) {
         return rows;
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(function(err) {
+        console.log(err);
       });
   });
 };
@@ -33,8 +32,9 @@ const postListing = ({ price, minStay, stars, numRatings, max }) => {
       .then(function(rows) {
         return rows;
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(function(err) {
+        console.log(err);
+        return err
       });
   });
 };
@@ -54,30 +54,32 @@ const deleteListing = id => {
 
 const getDates = () => {
   return Promise.using(getMySqlConnection(), function(connection) {
+    // console.log('ho')
     return connection
-      .query("select * from dates")
+      .query("select * from dates limit 100")
       .then(function(rows) {
         return rows;
       })
       .catch(function(error) {
+        console.log('err')
         console.log(error);
+        return error
       });
   });
 };
 
-// '1/02/2019','1'
+// '2019-01-02','1'
 const postDate = ({ date, apartmentId }) => {
   return Promise.using(getMySqlConnection(), function(connection) {
     return connection
-      .query("insert into dates (date, apartment_id) values (?,?)", [
-        date,
-        apartmentId
-      ])
+      .query("insert into dates (date, apartment_id) values (?,?)", 
+      [date, apartmentId])
       .then(function(rows) {
         return rows;
       })
       .catch(function(error) {
         console.log(error);
+        return error
       });
   });
 };

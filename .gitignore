@@ -5,3 +5,7 @@ Louis-FEC-Booking.pem
 *.pem
 *.csv
 schema/seed.sql
+certs
+my-safe-directory
+newrelic.js
+newrelic_agent.log

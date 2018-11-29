@@ -4,7 +4,7 @@ pool = mysql.createPool({
   host: "localhost",
   user: "root",
   database: "booking",
-  connectionLimit: 10
+  connectionLimit: 15
 });
 
 function getMySqlConnection() {

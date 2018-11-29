@@ -1,18 +1,24 @@
+require("newrelic");
+
 const bodyParser = require("body-parser");
+var compression = require("compression");
 const cors = require("cors");
-const database = require("../database/index.js");
+// const database = require("../database/index.js"); // mysql connection
+const database = require("../cockroachDB/index.js");
+
 const express = require("express");
-const path = require("path");
 const morgan = require("morgan");
+const path = require("path");
 
 var app = express();
+
+app.use(compression());
 app.use(bodyParser.json());
 app.use(cors());
 app.use("default", morgan);
-
 app.use(express.static(path.join(__dirname + "/../client/dist")));
 
-app.get("/api/listingdata/:id", (req, res) => {
+app.get("/api/listing/:id", (req, res) => {
   id = req.params.id;
   database
     .getListingData(id)
@@ -38,6 +44,7 @@ app.get("/api/listings", (req, res) => {
 // { price, minStay, stars, numRatings, max }
 // '10000','10','1','1','1000'
 app.post("/api/listing", (req, res) => {
+  console.log(req.body);
   database
     .postListing(req.body)
     .then(dataObj => {
@@ -48,9 +55,21 @@ app.post("/api/listing", (req, res) => {
     });
 });
 
+// posts a listing with a specified id
+app.post("/api/listingId", (req, res) => {
+  database
+    .postListingId(req.body)
+    .then(dataObj => {
+      res.status(200).send(dataObj);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
+
 app.delete("/api/listing/:id", (req, res) => {
   database
-    .deleteListing(req.params.id)
+    .deleteListing(req.params)
     .then(dataObj => {
       res.status(200).send(dataObj);
     })
@@ -81,6 +100,12 @@ app.post("/api/date", (req, res) => {
     .catch(err => {
       res.status(500).send(err);
     });
+});
+
+// TODO implement delete dates
+
+app.get("/api/*", (req, res) => {
+  res.send(404);
 });
 
 app.get("/*", (req, res) => {

@@ -1,0 +1,14 @@
+# artillery run loadtest.yml
+
+config:
+  target: 'http://127.0.0.1:4000'
+  http: 10
+  phases:
+    - duration: 60
+      arrivalRate: 1000
+  defaults:
+    headers:
+scenarios:
+  - flow:
+    - get:
+        url: "/api/listings"

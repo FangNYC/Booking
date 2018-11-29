@@ -7,12 +7,16 @@
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "test": "jest --detectOpenHandles",
+    "drop_roach": "node cockroachDB/seed.js",
+    "init_roach":"",
+    "seed_dev": "node timer/start_timer.js ;  npm run seed_tables; npm run seed_tables; npm run seed_mysql; npm run seed_mongo; node timer/end_timer.js",
     "seed_mysql": "node seed_mysql.js",
     "seed_mongo": "node seed_mongo.js",
     "seed_apartment": "node generate_apartment_csv.js;",
     "seed_dates": "node generate_date_csv.js",
     "seed_tables": "npm run seed_apartment; npm run seed_dates",
-    "seed": "npm run seed_tables; npm run seed_mysql; npm run seed_mongo"
+    "seed_a_lot": "npm run seed_tables; npm run seed_tables; npm run seed_tables; npm run seed_tables; npm run seed_tables; npm run seed_tables; npm run seed_tables; npm run seed_tables; npm run seed_tables; npm run seed_tables;",
+    "timer": "node timer/start_timer.js; node timer/end_timer.js"
   },
   "repository": {
     "type": "git",
@@ -25,9 +29,11 @@
   },
   "homepage": "https://github.com/FangNYC/Booking#readme",
   "dependencies": {
+    "@newrelic/native-metrics": "^3.1.2",
     "axios": "^0.18.0",
     "bluebird": "^3.5.2",
     "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
     "cors": "^2.8.4",
     "csv-write-stream": "^2.0.0",
     "express": "^4.16.4",
@@ -36,7 +42,9 @@
     "mongoose": "^5.3.11",
     "morgan": "^1.9.0",
     "mysql": "^2.16.0",
+    "newrelic": "^4.11.0",
     "nodemon": "^1.18.4",
+    "pg": "^7.6.1",
     "pm2": "^3.2.2",
     "promise-mongo": "^3.0.3",
     "promise-mysql": "^3.3.1",
@@ -46,7 +54,9 @@
     "react-dates": "^18.1.1",
     "react-dom": "^16.5.2",
     "react-flexbox-grid": "^2.1.2",
-    "react-ratings-declarative": "^3.4.1"
+    "react-ratings-declarative": "^3.4.1",
+    "sequelize": "^4.41.2",
+    "sequelize-cockroachdb": "^1.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

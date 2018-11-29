@@ -1,12 +1,22 @@
 var mysqlP = require("promise-mysql");
 
+// TODO - Refactor to implement connection pool
+
+function getMySqlConnection() {
+  // console.log('get')
+  return pool.getConnection().disposer(function(connection) {
+    pool.releaseConnection(connection);
+  });
+}
+
+
 let stringParse = data => {
   return JSON.parse(JSON.stringify(data));
 };
 
 var getListingData = id => {
-  console.log("get lsiting data");
-  console.log("Database query", id);
+  // console.log("get lsiting data");
+  // console.log("Database query", id);
 
   let aptData = {
     dates: [],
@@ -19,19 +29,19 @@ var getListingData = id => {
   };
 
   return mysqlP
-    .createConnection({
+    .getMySqlConnection({
       host: "localhost",
       user: "root",
       database: "booking"
     })
     .then(conn => {
       let aptDates = conn.query(`
-		SELECT *
-		FROM apartment t1
-		INNER JOIN dates t2 
-		ON t1.id = t2.apartment_id
-		WHERE t1.id=${id};
-		`);
+      SELECT *
+      FROM apartment t1
+      INNER JOIN dates t2 
+      ON t1.id = t2.apartment_id
+      WHERE t1.id=${id};
+      `);
 
       conn.end();
       return aptDates;

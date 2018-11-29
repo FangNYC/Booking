@@ -1,6 +1,9 @@
 const request = require("supertest");
 const app = require("../server/app");
 
+// make sure duplicate apartments can't get uploaded
+// mySQL
+
 describe("Test the root path", () => {
   test("It should response the GET method", () => {
     return request(app)
@@ -50,8 +53,9 @@ describe("Test posting a listing", function() {
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);
-        console.log(res.text);
-        listingId = JSON.parse(res.text).insertId;
+        // listingId = JSON.parse(res.text).insertId; // mySql implementation
+        response = JSON.parse(res.text);
+        listingId = response.rows[0].id // cockroachDB impelementation
         console.log("created listing " + listingId);
         done();
       });
@@ -69,8 +73,7 @@ describe("Test posting a date", function() {
       .expect(200)
       .end(function(err, res) {
         if (err) return done(err);
-        dateId = JSON.parse(res.text).insertId;
-        console.log("created date " + dateId);
+        result = JSON.parse(res.text);
         done();
       });
   });
