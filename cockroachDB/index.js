@@ -27,7 +27,7 @@ function getListings() {
   return new Promise((resolve, reject) => {
     query(
       `
-      select * from apartment limit 100
+      select * from apartment order by id desc limit 100
       `,
       [],
       (err, result) => {
