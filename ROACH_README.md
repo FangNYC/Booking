@@ -21,3 +21,7 @@ To seed DB with listing ID 1-5000:
 To seed additional listings w random generated id:
 
 > artillery run cockroachLoadTest/seedAptRandomId.yml
+
+# Load Testing on a Remote Server
+
+> Clone this repo, run npm install, and run any of the prod load tests to test the db

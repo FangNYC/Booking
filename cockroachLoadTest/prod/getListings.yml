@@ -1,0 +1,15 @@
+# artillery run cockroachLoadTest/prod/getListings.yml
+
+config:
+  target: "http://ec2-54-209-75-211.compute-1.amazonaws.com"
+  http: 10
+  phases:
+    - duration: 10
+      arrivalRate: 400
+  defaults:
+    headers:
+scenarios:
+  - name: "get list of listings"
+    flow:
+      - get:
+          url: "/api/listings"
