@@ -1,8 +1,8 @@
-# artillery run cockroachLoadTest/seedAptRandomId.yml
+# artillery run cockroachLoadTest/dev/seedAptRandomId.yml
 
 config:
   target: "http://127.0.0.1:4000"
-  processor: "./generator.js"
+  processor: "../generator.js"
   http: 30
   phases:
     - duration: 10

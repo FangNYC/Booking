@@ -1,0 +1,26 @@
+# load test database writes
+
+# artillery run cockroachLoadTest/prod/apartment.yml
+
+config:
+  target: "http://ec2-54-209-75-211.compute-1.amazonaws.com"
+  processor: "../generator.js"
+  http: 10
+  phases:
+    - duration: 60
+      arrivalRate: 250
+  defaults:
+    headers:
+scenarios:
+  - name: "register an apartment listing with random generated id"
+    flow:
+      - function: "generateApartmentData"
+      - post:
+          url: "/api/listing"
+          json:
+            price: "{{price}}"
+            minStay: "{{minStay}}"
+            stars: "{{stars}}"
+            numRatings: "{{numRatings}}"
+            max: "{{max}}"
+      # - log: "Sent a request to /api/listing with {{ price }}, {{ stars }}, {{ minStay }}"

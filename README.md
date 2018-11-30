@@ -37,6 +37,14 @@ System Design
 `npm run react-dev`
 `npm run server-dev`
 
+## EC2 Deployment
+
+This web service is intended to run on an EC2 instance
+Permissions .pem files are ignored by git
+
+`ssh -i "<permissions>.pem" <EC2_DNS>`
+
 ## Cockroach DB
 
 This app can utilize a cockroachDB cluster deployed on Digital Ocean. See ROACH_README.md for more details
+

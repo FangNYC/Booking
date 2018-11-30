@@ -1,8 +1,8 @@
-# artillery run cockroachLoadTest/seedDates.yml
+# artillery run cockroachLoadTest/dev/seedDates.yml
 
 config:
   target: "http://127.0.0.1:4000"
-  processor: "./generator.js"
+  processor: "../generator.js"
   http: 10
   phases:
     - duration: 10

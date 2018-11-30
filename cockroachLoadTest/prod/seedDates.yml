@@ -1,0 +1,21 @@
+# artillery run cockroachLoadTest/prod/seedDates.yml
+
+config:
+  target: "http://ec2-54-209-75-211.compute-1.amazonaws.com"
+  processor: "../generator.js"
+  http: 10
+  phases:
+    - duration: 10
+      arrivalRate: 200
+  defaults:
+    headers:
+scenarios:
+  - name: "register dates to apartments 0-5000"
+    flow:
+      - function: "generateDateData"
+      - post:
+          url: "/api/date"
+          json:
+            apartmentId: "{{apartmentId}}"
+            date: "{{date}}"
+      - log: "Sent a request to /api/date with {{ apartmentId }}, {{ date }}"
