@@ -54,25 +54,30 @@ class Booking extends React.Component {
 	}
 
 	componentDidMount() {
-
 		let queryString = window.location;
 		console.log(queryString)
 		let listingId = (queryString.search.split('=')[1])
 		console.log('client current id', listingId)
 		if(listingId){
-			axios.get(`/api/listing/${listingId}`)
+			axios.post('/graphql', {"query": "{message}"})
 			.then(({data}) => {
 				console.log(data)
-				this.setState(data)
-				var badDates = data.dates.map(date => {
-					return moment(date.toString())
-				})
-				return badDates
-			}).catch((err)=>{
-				console.log(err)
-			}).then((momentsArr)=>{
-				this.setState({BAD_DATES: momentsArr})
 			})
+
+
+			// axios.get(`/api/listing/${listingId}`)
+			// .then(({data}) => {
+			// 	console.log(data)
+			// 	this.setState(data)
+			// 	var badDates = data.dates.map(date => {
+			// 		return moment(date.toString())
+			// 	})
+			// 	return badDates
+			// }).catch((err)=>{
+			// 	console.log(err)
+			// }).then((momentsArr)=>{
+			// 	this.setState({BAD_DATES: momentsArr})
+			// })
 		}
 	}
 

@@ -5,6 +5,17 @@ var schema = buildSchema(`
     type Query {
         message: String
     }
+
+    type Listing {
+      id: Int
+      dates: [Date]
+    }
+
+    type Date {
+      id: Int
+      date: String
+      apartmentId: Int
+    }
 `);
 
 // Root resolver
