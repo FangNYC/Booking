@@ -16,6 +16,7 @@ function getListingData(id) {
           if (!result) {
             reject(result);
           }
+          console.log(result.rows)
           resolve(result.rows);
         }
       }
@@ -23,11 +24,35 @@ function getListingData(id) {
   });
 }
 
+function getListing(id) {
+  return new Promise((resolve, reject) => {
+  query(
+    `
+    SELECT * FROM apartment t1 
+    WHERE t1.id=$1;
+    `,
+    [id],
+    (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        if (!result) {
+          reject(result);
+        }
+        console.log(result.rows)
+        resolve(result.rows[0]);
+      }
+    }
+  );
+})}
+
+
 function getListings() {
+  console.log('hi listings')
   return new Promise((resolve, reject) => {
     query(
       `
-      select * from apartment order by id desc limit 100
+      select * from apartment order by id desc
       `,
       [],
       (err, result) => {
@@ -36,6 +61,7 @@ function getListings() {
           if (!result) {
             reject(result);
           }
+          console.log(result.rows)
           resolve(result.rows);
         }
       }
@@ -108,8 +134,9 @@ function deleteListing({ id }) {
 }
 
 function getDates() {
+  console.log('getting dates')
   return new Promise((resolve, reject) => {
-    query(`select * from dates limit 100`, [], (err, result) => {
+    query(`select * from dates`, [], (err, result) => {
       if (err) reject(err);
       else {
         if (!result) {
@@ -163,7 +190,7 @@ function deleteDate({ id }) {
 
 // client api
 module.exports.getListingData = getListingData;
-
+module.exports.getListing = getListing
 // crud api
 module.exports.getListings = getListings;
 module.exports.postListing = postListing;

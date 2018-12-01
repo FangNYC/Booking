@@ -30,6 +30,8 @@
   "homepage": "https://github.com/FangNYC/Booking#readme",
   "dependencies": {
     "@newrelic/native-metrics": "^3.1.2",
+    "apollo-server": "^2.2.5",
+    "apollo-server-express": "^2.2.5",
     "axios": "^0.18.0",
     "bluebird": "^3.5.2",
     "body-parser": "^1.18.3",

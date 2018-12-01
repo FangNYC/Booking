@@ -1,26 +1,57 @@
-var { buildSchema } = require('graphql');
+var { buildSchema } = require("graphql");
+const database = require("../cockroachDB")
 
 // GraphQL schema
 var schema = buildSchema(`
-    type Query {
-        message: String
-    }
 
     type Listing {
-      id: Int
+      id: ID!,
+      price: String,
+      minstay: String,
+      stars: String,
+      numratings: String,
+      max: String,
       dates: [Date]
     }
 
     type Date {
-      id: Int
-      date: String
-      apartmentId: Int
+      id: ID!,
+      date: String!,
+      apartment_id: Listing
     }
+
+    type Dates {
+      dates: [Date]
+    }
+
+    type Query {
+      listings: [Listing],
+      dates(apartment_id: ID!): [Date],
+      listing(id: ID!): Listing,
+      date(id: ID!): Date,
+      message: String
+    }
+
 `);
+
+const myFunction = () => {
+  return "Hi";
+};
 
 // Root resolver
 var root = {
-    message: () => 'Hello World!'
+  listing: async (args) => {
+    console.log(args)
+    return await database.getListing(args.id)
+  },
+  listings: async () => {
+    return await database.getListings()
+  },
+  dates: async (args) => {
+    console.log(args)
+    return await database.getDates()
+  },
+  message: () => myFunction()
 };
 
 module.exports.schema = schema;
