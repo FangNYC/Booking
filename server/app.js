@@ -25,15 +25,6 @@ app.use(cors());
 app.use("default", morgan);
 app.use(express.static(path.join(__dirname + "/../client/dist")));
 
-/* Graph QL Endpoint */
-const { schema, root } = require('../graphQL/index.js')
-/* Expose GraphQL Endpoint */
-app.use('/graphql', express_graphql({
-  schema: schema,
-  rootValue: root,
-  graphiql: true
-}));
-
 /* REST API Routes for Database CRUD */
 app.get("/api/listing/:id", (req, res) => {
   id = req.params.id;
