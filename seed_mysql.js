@@ -1,3 +1,5 @@
+/* this is a utility script to seed mySQL locally */
+
 const exec = require("child_process").exec;
 
 console.log("seeding mysql from apartment.csv and dates.csv");

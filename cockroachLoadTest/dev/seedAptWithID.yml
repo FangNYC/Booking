@@ -5,8 +5,8 @@ config:
   processor: "../generator.js"
   http: 10
   phases:
-    - duration: 10
-      arrivalRate: 500
+    - duration: 50
+      arrivalRate: 200
   defaults:
     headers:
 scenarios:

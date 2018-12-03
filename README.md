@@ -1,6 +1,8 @@
 # Booking
 ## by Louis Otter
 
+## System Design by Ben Mangold
+
 Booking Component Referencing AirBnB 
 
 React, Node.js, MySQL, MongoDB, CockroachDB
