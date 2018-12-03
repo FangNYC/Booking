@@ -1,3 +1,5 @@
+/* this is a utility script to seed mongodb locally */
+
 const exec = require("child_process").exec;
 
 console.log("seeding mongoDb from apartment.csv");
