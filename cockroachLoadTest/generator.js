@@ -16,10 +16,8 @@ const MIN_YEAR = 6; // 2016-2018
 var aptIdCounter = 1;
 function generateDateData(userContext, events, done) {
   // generate data with Faker:
-  const date = `
-    201${(faker.random.number() % 2) + MIN_YEAR}-${(faker.random.number() % 11) + 1}-${(faker.random.number() % 29) + 1}
-    `;
-  const apartmentId = aptIdCounter++ % 5000;
+  const date = `201${(faker.random.number() % 2) + MIN_YEAR}-${(faker.random.number() % 11) + 1}-${(faker.random.number() % 29) + 1}`;
+  const apartmentId = aptIdCounter++ % 1000;
   // add variables to virtual user's context:
   userContext.vars.date = date.toString();
   userContext.vars.apartmentId = apartmentId.toString();

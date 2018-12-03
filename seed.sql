@@ -1,3 +1,5 @@
+-- this schema loads mySQL with csv data
+
 USE booking
 
 LOAD DATA LOCAL INFILE  

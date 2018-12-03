@@ -1,23 +1,31 @@
+/* NewRelic Analytics */
 require("newrelic");
 
+/* Database Connections */
+// const database = require("../database/index.js"); // mysql connection
+
+/* CockroachDB Connection */
+const database = require("../cockroachDB/index.js");
+
+/* Express Middlewear */
 const bodyParser = require("body-parser");
 var compression = require("compression");
 const cors = require("cors");
-// const database = require("../database/index.js"); // mysql connection
-const database = require("../cockroachDB/index.js");
-
 const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 
-var app = express();
+/* Express Application */
+const app = express();
 
+/* Express Middleware Configuration */
 app.use(compression());
 app.use(bodyParser.json());
 app.use(cors());
 app.use("default", morgan);
 app.use(express.static(path.join(__dirname + "/../client/dist")));
 
+/* REST API Routes for Database CRUD */
 app.get("/api/listing/:id", (req, res) => {
   id = req.params.id;
   database
