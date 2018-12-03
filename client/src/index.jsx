@@ -56,14 +56,18 @@ class Booking extends React.Component {
   componentDidMount() {
     let queryString = window.location;
     let listingId = queryString.search.split("=")[1];
+    console.log(listingId)
     if (listingId) {
-      axios.get(`ec2-54-209-75-211.compute-1.amazonaws.com/api/listing/${listingId}`)
+      axios.get(`http://ec2-54-209-75-211.compute-1.amazonaws.com/api/listing/${listingId}`)
       .then(({data}) => {
-      	this.setState({
-          max: data[0].max,
-          price: data[0].price,
-          stars: parseInt(data[0].stars)
-        })
+        console.log(data)
+        if(data.length !== 0) {
+          this.setState({
+            max: data[0].max,
+            price: data[0].price,
+            stars: parseInt(data[0].stars)
+          })
+        }
       	var badDates = data.map(({date}) => {
       		return moment(date.toString())
         })
