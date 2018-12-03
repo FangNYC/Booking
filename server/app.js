@@ -17,8 +17,8 @@ const express_graphql = require('express-graphql');
 // /* Apollo GraphQL Server */
 // const server = require("../apollo/index.js").server
 
-/* Graph QL Server */
-const { schema, root } = require('../graphQL/index.js')
+// /* Apollo GraphQL Middleware Configuration */
+// server.applyMiddleware({app});
 
 /* Express Application */
 const app = express();
@@ -30,9 +30,8 @@ app.use(cors());
 app.use("default", morgan);
 app.use(express.static(path.join(__dirname + "/../client/dist")));
 
-// /* Apollo GraphQL Middleware Configuration */
-// server.applyMiddleware({app});
-
+/* Graph QL Server */
+const { schema, root } = require('../graphQL/index.js')
 /* Expose GraphQL Endpoint */
 app.use('/graphql', express_graphql({
   schema: schema,
