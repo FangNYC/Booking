@@ -6,6 +6,19 @@ const typeDefs = gql`
   type Query {
     hello: String
   }
+  type Listing {
+    id: ID,
+    minstay: String,
+    max: String,
+    stars: String,
+    price: String,
+    dates: [Date]
+  }
+  type Date {
+    id: ID,
+    apartment_id: Int
+  }
+
 `;
 
 // Provide resolver functions for your schema fields

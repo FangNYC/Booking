@@ -1,37 +1,46 @@
+/* NewRelic Analytics */
 require("newrelic");
 
+/* Database Connections */
 // const database = require("../database/index.js"); // mysql connection
 const database = require("../cockroachDB/index.js");
-const { schema, root } = require('../graphQL/index.js')
 
+/* Express Middlewear */
 const bodyParser = require("body-parser");
 var compression = require("compression");
 const cors = require("cors");
 const express = require("express");
-const express_graphql = require('express-graphql');
 const morgan = require("morgan");
 const path = require("path");
+const express_graphql = require('express-graphql');
 
-const server = require("../apollo/index.js").server
+// /* Apollo GraphQL Server */
+// const server = require("../apollo/index.js").server
+
+/* Graph QL Server */
+const { schema, root } = require('../graphQL/index.js')
+
+/* Express Application */
 const app = express();
 
+/* Express Middleware Configuration */
 app.use(compression());
 app.use(bodyParser.json());
 app.use(cors());
 app.use("default", morgan);
 app.use(express.static(path.join(__dirname + "/../client/dist")));
 
+// /* Apollo GraphQL Middleware Configuration */
+// server.applyMiddleware({app});
 
-server.applyMiddleware({app});
+/* Expose GraphQL Endpoint */
+app.use('/graphql', express_graphql({
+  schema: schema,
+  rootValue: root,
+  graphiql: true
+}));
 
-// // No Apollo
-// app.use('/graphql', bodyParser.json(), express_graphql({
-//   schema: schema,
-//   rootValue: root,
-//   graphiql: true
-// }));
-
-
+/* REST API Routes for Database CRUD */
 app.get("/api/listing/:id", (req, res) => {
   id = req.params.id;
   database
