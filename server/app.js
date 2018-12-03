@@ -14,13 +14,6 @@ const cors = require("cors");
 const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
-const express_graphql = require('express-graphql');
-
-// /* Apollo GraphQL Server */
-// const server = require("../apollo/index.js").server
-
-// /* Apollo GraphQL Middleware Configuration */
-// server.applyMiddleware({app});
 
 /* Express Application */
 const app = express();
