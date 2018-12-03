@@ -16,7 +16,6 @@ function getListingData(id) {
           if (!result) {
             reject(result);
           }
-          console.log(result.rows)
           resolve(result.rows);
         }
       }
@@ -39,7 +38,6 @@ function getListing(id) {
         if (!result) {
           reject(result);
         }
-        console.log(result.rows)
         resolve(result.rows[0]);
       }
     }
@@ -48,7 +46,6 @@ function getListing(id) {
 
 
 function getListings() {
-  console.log('hi listings')
   return new Promise((resolve, reject) => {
     query(
       `
@@ -61,7 +58,6 @@ function getListings() {
           if (!result) {
             reject(result);
           }
-          console.log(result.rows)
           resolve(result.rows);
         }
       }
@@ -134,7 +130,6 @@ function deleteListing({ id }) {
 }
 
 function getDates() {
-  console.log('getting dates')
   return new Promise((resolve, reject) => {
     query(`select * from dates`, [], (err, result) => {
       if (err) reject(err);
