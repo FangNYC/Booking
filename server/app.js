@@ -3,6 +3,8 @@ require("newrelic");
 
 /* Database Connections */
 // const database = require("../database/index.js"); // mysql connection
+
+/* CockroachDB Connection */
 const database = require("../cockroachDB/index.js");
 
 /* Express Middlewear */
@@ -30,7 +32,7 @@ app.use(cors());
 app.use("default", morgan);
 app.use(express.static(path.join(__dirname + "/../client/dist")));
 
-/* Graph QL Server */
+/* Graph QL Endpoint */
 const { schema, root } = require('../graphQL/index.js')
 /* Expose GraphQL Endpoint */
 app.use('/graphql', express_graphql({

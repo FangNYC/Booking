@@ -1,13 +1,31 @@
 var { buildSchema } = require('graphql');
+const database = require("../cockroachDB")
+
 // GraphQL schema
 var schema = buildSchema(`
     type Query {
-        message: String
+      message: String
+    }
+
+    type Date {
+      id: ID!
+    }
+
+    type Listings {
+      listings: [Listing]
+    }
+
+    type Listing {
+      id: ID!
+      dates: [Date]
     }
 `);
+
 // Root resolver
 var root = {
   message: () => 'Hello World!',
+  listings: async () => await database.getListings()
+
 };
 module.exports.schema = schema;
 module.exports.root = root;

@@ -55,50 +55,24 @@ class Booking extends React.Component {
 
   componentDidMount() {
     let queryString = window.location;
-    console.log(queryString);
     let listingId = queryString.search.split("=")[1];
-    console.log("client current id", listingId);
     if (listingId) {
-      axios
-        .post("/graphql", { query: `{message(id:${listingId}}` })
-        .then(({ data }) => {
-          console.log(data);
+      axios.get(`/api/listing/${listingId}`)
+      .then(({data}) => {
+      	this.setState({
+          max: data[0].max,
+          price: data[0].price,
+          stars: parseInt(data[0].stars)
         })
-        .catch(err => {
-          console.log(err);
-        });
-
-      axios
-        .post("/graphql", { query: `{listing(id:${listingId}){id, stars}}` })
-        .then(({ data }) => {
-          console.log(data);
+      	var badDates = data.map(({date}) => {
+      		return moment(date.toString())
         })
-        .catch(err => {
-          console.log(err);
-        });
-
-      // axios
-      //   .post("/graphql", { query: `{dates{apartment_id, date}}` })
-      //   .then(({ data }) => {
-      //     console.log(data);
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
-
-      // axios.get(`/api/listing/${listingId}`)
-      // .then(({data}) => {
-      // 	console.log(data)
-      // 	this.setState(data)
-      // 	var badDates = data.dates.map(date => {
-      // 		return moment(date.toString())
-      // 	})
-      // 	return badDates
-      // }).catch((err)=>{
-      // 	console.log(err)
-      // }).then((momentsArr)=>{
-      // 	this.setState({BAD_DATES: momentsArr})
-      // })
+      	return badDates
+      }).catch((err)=>{
+      	console.error(err)
+      }).then((momentsArr)=>{
+      	this.setState({BAD_DATES: momentsArr})
+      })
     }
   }
 
