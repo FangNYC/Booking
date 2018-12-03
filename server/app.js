@@ -111,7 +111,6 @@ app.post("/api/date", (req, res) => {
 });
 
 // TODO implement delete dates
-
 app.get("/api/*", (req, res) => {
   res.send(404);
 });

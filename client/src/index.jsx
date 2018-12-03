@@ -57,7 +57,7 @@ class Booking extends React.Component {
     let queryString = window.location;
     let listingId = queryString.search.split("=")[1];
     if (listingId) {
-      axios.get(`/api/listing/${listingId}`)
+      axios.get(`ec2-54-209-75-211.compute-1.amazonaws.com/api/listing/${listingId}`)
       .then(({data}) => {
       	this.setState({
           max: data[0].max,
